@@ -1,6 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
 
+import bank.Bank;
 import bank.account.CurrentAccount;
 import bank.account.SavingsAccount;
 import bank.client.Account;
@@ -17,8 +18,11 @@ public class CashMachineATM {
 		Client client = new Client();
 		client.setNome(name);
 
-		Account ca = new CurrentAccount(client);
-		Account sa = new SavingsAccount(client);
+		Bank bank = new Bank();
+		bank.setNome("Banco do Brasil");
+		
+		Account ca = new CurrentAccount(client,bank);
+		Account sa = new SavingsAccount(client,bank);
 
 		ca.deposit(blc);
 		ca.printExtract();

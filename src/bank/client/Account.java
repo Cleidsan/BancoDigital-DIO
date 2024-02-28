@@ -1,5 +1,6 @@
 package bank.client;
 
+import bank.Bank;
 import bank.Movement;
 
 public class Account implements Movement{
@@ -11,11 +12,13 @@ public class Account implements Movement{
 	private int number;
 	private double balance;
 	protected Client client;
+	protected static Bank bank;
 	
-	public Account(Client client) {
+	public Account(Client client, Bank bank) {
 		this.agency = Account.AGENCY_STANDARD;
 		this.number = SEQUENTIAL++;
 		this.client = client;
+		Account.bank = bank;
 		
 	}
 	public double getBalance() {
@@ -50,6 +53,7 @@ public class Account implements Movement{
 	@Override // Method to print the extract
 	public void printExtract() {
 		System.out.println(String.format("Titular: %s", this.client.getNome()));
+		System.out.println(String.format("Bank: %s", Account.bank.getNome()));
 		System.out.println(String.format("Agency: %d", this.agency));
 		System.out.println(String.format("Number: %d", this.number));
 		System.out.println(String.format("Balance: %.2f", this.balance));
